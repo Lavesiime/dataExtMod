@@ -1,12 +1,9 @@
 @echo off
-if %~x1 == .apk goto start
-goto end
-
-:start
 setlocal
 cd /d %~dp0
-Call :UnZipFile "C:\Temp" "%~1"
+Call :UnZipFile "C:\Temp\" "C:\Users\s620154\Downloads\G\AIR\2013\a1\1.zip"
 exit /b
+
 :UnZipFile <ExtractTo> <newzipfile>
 set vbs="%temp%\_.vbs"
 if exist %vbs% del /f /q %vbs%
@@ -21,16 +18,3 @@ if exist %vbs% del /f /q %vbs%
 >>%vbs% echo Set objShell = Nothing
 cscript //nologo %vbs%
 if exist %vbs% del /f /q %vbs%
-echo Unzipped
-pause
-move "C:\Temp\assets\Data.rsdk.xmf" "%~dp1\Data.rsdk"
-echo Moved
-pause
-del /Q "C:\Temp"
-echo Deleted
-pause
-goto end
-
-:end
-echo end
-pause
