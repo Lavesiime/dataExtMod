@@ -6,15 +6,23 @@ if exist ext\ (
     md ext
     cd ext
 )
-rename %1 file.zip
-tar -xf C:\Users\s620154\Downloads\G\AIR\2013\a1\ext\file.zip
-goto end
+rename %1 game.zip
+tar -xf "%~dp1\game.zip"
+cd assets
+if exist Data.rsdk.xmf (
+    move Data.rsdk.xmf "%~dp0"
+) else (
+    echo Data.rsdk couldn't be found
+    pause
+    goto end
+)
+cd ..
+cd ..
+rename Data.rsdk.xmf Data.rsdk
+rename %1 game.apk
+rmdir /q /s ext
 
-setlocal
-cd /d %~dp0
-rename %1  file.zip
-Call :UnZipFile "C:\Temp\" "%~dp1\file.zip"
-exit /b
-
+echo Data.rsdk has been found
+pause
 
 :end
