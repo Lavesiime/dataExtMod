@@ -1,20 +1,13 @@
 @echo off
+cd "%~dp0"
+md ext
+tar -xf C:\Users\s620154\Downloads\G\AIR\2013\a1\ext\file.zip
+goto end
 setlocal
 cd /d %~dp0
-Call :UnZipFile "C:\Temp\" "C:\Users\s620154\Downloads\G\AIR\2013\a1\1.zip"
+rename %1  file.zip
+Call :UnZipFile "C:\Temp\" "%~dp1\file.zip"
 exit /b
 
-:UnZipFile <ExtractTo> <newzipfile>
-set vbs="%temp%\_.vbs"
-if exist %vbs% del /f /q %vbs%
->%vbs%  echo Set fso = CreateObject("Scripting.FileSystemObject")
->>%vbs% echo If NOT fso.FolderExists(%1) Then
->>%vbs% echo fso.CreateFolder(%1)
->>%vbs% echo End If
->>%vbs% echo set objShell = CreateObject("Shell.Application")
->>%vbs% echo set FilesInZip=objShell.NameSpace(%2).items
->>%vbs% echo objShell.NameSpace(%1).CopyHere(FilesInZip)
->>%vbs% echo Set fso = Nothing
->>%vbs% echo Set objShell = Nothing
-cscript //nologo %vbs%
-if exist %vbs% del /f /q %vbs%
+
+:end
