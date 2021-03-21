@@ -19,6 +19,7 @@ if exist Data.rsdk.xmf (
 cd ..
 cd ..
 rename Data.rsdk.xmf Data.rsdk
+::Below doesn't work for some reason, not sure why
 rename %1 game.apk
 rmdir /q /s ext
 
