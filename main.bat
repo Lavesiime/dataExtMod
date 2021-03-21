@@ -12,6 +12,7 @@ cd assets
 if exist Data.rsdk.xmf (
     move Data.rsdk.xmf "%~dp0"
 ) else (
+    cls
     echo Data.rsdk couldn't be found
     pause
     goto end
@@ -19,10 +20,12 @@ if exist Data.rsdk.xmf (
 cd ..
 cd ..
 rename Data.rsdk.xmf Data.rsdk
-::Below doesn't work for some reason, not sure why
-rename %1 game.apk
 rmdir /q /s ext
+::Below doesn't work for some reason, not sure why
+cd "%~dp1"
+rename %1 game.apk
 
+cls
 echo Data.rsdk has been found
 pause
 
