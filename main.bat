@@ -24,12 +24,25 @@ rename Data.rsdk.xmf Data.rsdk
 rmdir /q /s ext
 ::Below doesn't work for some reason, not sure why
 cd "%~dp1"
-rename %1 game.apk
+rename game.zip game.apk
 
 cls
 echo Data.rsdk has been found
-echo If you want to mod it, you'll need retrun, which you can find at
-echo https://github.com/Lavesiime/retrun
+echo If you want to use mods, you'll need to extract the Data.rsdk
+set /p answer=Do you want to extract it? (y/n)
+cls
+if %answer%==Y goto unpack
+if %answer%==y goto unpack
+goto end
+
+:unpack
+cd "%~dp0"
+cd batch
+echo Unpacking...
+
+retrun x ..\Data.rsdk -d=..\Unpack -3 -L=RSDKv4FileList.txt
+cls
+echo Data file extracted
 pause
 
 :end
