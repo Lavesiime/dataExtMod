@@ -1,4 +1,6 @@
 @echo off
+
+::Move to this program's location
 cd "%~dp0"
 if exist ext\ (
     cd ext
@@ -6,8 +8,8 @@ if exist ext\ (
     md ext
     cd ext
 )
-rename %1 game.zip
-tar -xf "%~dp1\game.zip"
+echo Extracting...
+tar -xf "%1"
 cd assets
 if exist Data.rsdk.xmf (
     move Data.rsdk.xmf "%~dp0"
@@ -22,9 +24,6 @@ cd ..
 cd ..
 rename Data.rsdk.xmf Data.rsdk
 rmdir /q /s ext
-::Below doesn't work for some reason, not sure why
-cd "%~dp1"
-rename game.zip game.apk
 
 cls
 echo Data.rsdk has been found
@@ -40,7 +39,10 @@ cd "%~dp0"
 cd batch
 echo Unpacking...
 
-retrun x ..\Data.rsdk -d=..\Unpack -3 -L=RSDKv4FileList.txt
+::Make it look cool
+@echo on
+retrun x ..\Data.rsdk -d=..\unpack -3 -L=RSDKv4FileList.txt
+@echo off
 cls
 echo Data file extracted
 pause
